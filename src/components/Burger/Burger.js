@@ -3,12 +3,15 @@ import classes from './Burger.css'
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
 const Burger =(props)=>{
+    const ingredients = Object.keys(props.ingredients).map(aKey=>{
+        return [...Array(props.ingredients[aKey])].map((_,i)=>{
+            return <BurgerIngredient key={i+aKey} type={aKey}/>
+        })
+    })
     return(
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top"/>
-            <BurgerIngredient type="meat"/>
-            <BurgerIngredient type="salad"/>
-            <BurgerIngredient type="cheese"/>
+            {ingredients}
             <BurgerIngredient type="bread-bottom"/>
         </div>
     )
