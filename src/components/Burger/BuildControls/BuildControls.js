@@ -9,14 +9,21 @@ const controls =[
     {label:'Meat',type:'meat'}
 ]
 
-const data = controls.map(control=>(
-    <BuildControl key={control.label} label={control.label}/>
-))
 
 const buildControls = (props) =>(
     <div className={classes.BuildControls}>
-        {data}
+        {controls.map(control=>(
+    <BuildControl 
+     added={()=>props.ingredientAdded(control.type)}
+     removed={()=>props.ingredientRemoved(control.type)}
+     key={control.label} 
+     label={control.label}
+     disabled={props.disabled[control.type]}/>
+))}
     </div>
 );
+
+
+
 
 export default buildControls;
