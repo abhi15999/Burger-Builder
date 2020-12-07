@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
  
+import Modal from '../../components/UI/Modal/Modal'
 
 const INGREDIENT_PRICE = {
     salad:50,
@@ -85,6 +86,7 @@ export default class BurgerBuilder extends Component{
         }
         return(
             <Aux>
+                <Modal/>
                 <Burger ingredients={this.state.ingredients}/>
                 <OrderSummary ingredients={this.state.ingredients}/>
 
