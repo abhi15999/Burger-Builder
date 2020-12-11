@@ -1,0 +1,13 @@
+.MenuIcon{
+    width: 20px;
+    height: 20px;
+    background-color: inherit;
+    color: white;
+    /* position: fixed; */
+}
+
+@media(min-width:500px){
+    .MenuIcon{
+        display: none;
+    }
+}
