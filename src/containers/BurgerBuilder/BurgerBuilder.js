@@ -3,6 +3,7 @@ import Aux from '../../hoc/axillary'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+import axios from '../../axios-orders';
  
 import Modal from '../../components/UI/Modal/Modal'
 
@@ -87,7 +88,20 @@ export default class BurgerBuilder extends Component{
         this.setState({displayOrder:false})
     }
     orderContinueHandler = () =>{
-        alert('Continue!')
+        const order ={
+            ingredients : this.state.ingredients,
+            totalPrice : this.state.totalPrice,
+            customer : {
+                name:'Jack Torrace',
+                address:'Overlook Hotel',
+                street:'Next to Sidewinder'
+            },
+            email:'jacktorrace@theshining.com',
+            deliver:'Fastest'
+        }
+        axios.post('/orders.json',order)
+        .then(response=>console.log(response))
+        .catch(error=>console.log(error));
     }
 
     render(){
