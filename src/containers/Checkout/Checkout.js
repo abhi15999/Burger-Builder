@@ -9,17 +9,23 @@ export default class Checkout extends Component {
             salad:1,
             bacon:1,
             meat:0
-        }
+        },
+        totalPrice:0
     }
     componentDidMount(){
         const query = new URLSearchParams(this.props.location.search);
         const ing = {};
+        let price = 0;
         for(let param of query.entries())
         {
-            ing[param[0]] = +param[1]
+            if(param[0] === 'price'){
+                price = param[1];
+            } else {
+                ing[param[0]] = +param[1];
+            }
         }
 
-        this.setState({ingredients:ing})
+        this.setState({ingredients:ing , totalPrice:price})
     }
     continueCheckouthandler=()=>{
         this.props.history.replace('/checkout/contact-data')
@@ -35,7 +41,8 @@ export default class Checkout extends Component {
                 cancelCheckout={this.cancelCheckouthandler}
                 continueCheckout={this.continueCheckouthandler}
                 ingredients={this.state.ingredients}/>
-                <Route path={this.props.match.path + '/contact-data'} component={ContactData}/> 
+                <Route path={this.props.match.path + '/contact-data'} 
+                render={()=>(<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice} {...this.props}/>)}/> 
             </div>
         )
     }
