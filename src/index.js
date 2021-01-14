@@ -6,10 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 
 //Redux Func
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import Reducer from "./store/reducer";
+import { createStore, applyMiddleware, compose } from "redux";
+import burgerBuilderReducer from "./store/reducers/burgerBuilder";
+import thunk from 'redux-thunk'
 
-const store = createStore(Reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(burgerBuilderReducer,composeEnhancers(
+  applyMiddleware(thunk)
+));
 
 ReactDOM.render(
   <Provider store={store}>
